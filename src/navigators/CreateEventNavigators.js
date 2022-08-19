@@ -5,6 +5,7 @@ import InviteSocialMedia from '../Screens/createEvent/InviteSocialMedia';
 import InviteScreen from '../Screens/createEvent/InviteScreen';
 import InviteContact from '../Screens/createEvent/InviteContact';
 import EventDetailScreen from '../Screens/createEvent/EventDetailScreen';
+import ShareEventScreen from '../Screens/createEvent/ShareEventScreen';
 
 const CreateEventNavigators = () => {
      const Stack = createStackNavigator()
@@ -17,6 +18,7 @@ const CreateEventNavigators = () => {
                <Stack.Screen name='InviteSocialMedia' component={InviteSocialMedia} />
                <Stack.Screen name='InviteContact' component={InviteContact} />
                <Stack.Screen name='EventDetail' component={EventDetailScreen} />
+               <Stack.Screen name='ShareEvent' component={ShareEventScreen}    />
           </Stack.Navigator>
      );
 }
