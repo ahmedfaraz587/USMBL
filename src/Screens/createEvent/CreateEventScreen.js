@@ -12,6 +12,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import LinearGradient from 'react-native-linear-gradient';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const CreateEventScreen = ({navigation}) => {
   return (
@@ -21,6 +22,13 @@ const CreateEventScreen = ({navigation}) => {
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="arrow-back" size={24} color="black" />
             <Text style={styles.headerText}>Create Events</Text>
+            <View style={styles.shareIconView}>
+              <MaterialCommunityIcons
+                name="image-edit-outline"
+                size={24}
+                color="black"
+              />
+            </View>
           </View>
           <View
             style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
@@ -262,5 +270,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 5,
     marginBottom: 20,
+  },
+  shareIconView: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    right: 15,
+    elevation: 5,
   },
 });

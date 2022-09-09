@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   ScrollView,
+  Modal,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
@@ -15,138 +16,163 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const ShareEventScreen = ({navigation}) => {
-     const images = [
-       {
-         image: require('../../assets/Rectangle7.png'),
-       },
-       {
-         image: require('../../assets/Rectangle9.png'),
-       },
-       {
-         image: require('../../assets/Rectangle11.png'),
-       },
-       {
-         image: require('../../assets/Rectangle12.png'),
-       },
-       {
-         image: require('../../assets/Rectangle13.png'),
-       },
-     ];
+  const [modalVisible, setModalVisible] = useState(true);
 
-     return (
-       <ScrollView>
-         <View style={styles.container}>
-           <View style={styles.headerView}>
-             <ImageBackground
-               source={require('../../assets/createevent.png')}
-               style={styles.headerImage}
-               resizeMode="stretch">
-               <View style={styles.header}>
-                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                   <Ionicons name="arrow-back" size={24} color="black" />
-                 </TouchableOpacity>
-                 <Text style={styles.headerText}>Create Events</Text>
-                 <View style={styles.shareIconView}>
-                   <AntDesign
-                     name="sharealt"
-                     size={24}
-                     color="#F87124"
-                   />
-                 </View>
-               </View>
-             </ImageBackground>
-           </View>
-           <View>
-             <LinearGradient
-               style={styles.eventTitleCard}
-               colors={['#FF9A58', '#F87124']}>
-               <Text style={styles.eventTitleText}>
-                 Wine tasting London Tour
-               </Text>
-             </LinearGradient>
-           </View>
-           <View style={styles.view}>
-             <View style={styles.iconView}>
-               <MaterialCommunityIcons name="cash" size={24} color="white" />
-             </View>
-             <Text style={styles.text}>free to join</Text>
-           </View>
-           <View style={styles.view}>
-             <View style={styles.iconView}>
-               <MaterialCommunityIcons
-                 name="calendar-blank-outline"
-                 size={24}
-                 color="white"
-               />
-             </View>
-             <View>
-               <Text style={styles.text}>Mon, Jun, 5, 2022</Text>
-               <Text style={styles.dateText}>10 a.m - 2 p.m</Text>
-             </View>
-             <TouchableOpacity style={styles.changeButton}>
-               <AntDesign
-                 name="edit"
-                 size={20}
-                 color="#757575"
-                 style={{marginRight: 8}}
-               />
+  useEffect(() => {
+    setTimeout(()=>{
+      setModalVisible(false)
+    },3000)
+  }, []);
 
-               <Text style={styles.text}>change</Text>
-             </TouchableOpacity>
-           </View>
-           <View style={styles.view}>
-             <View style={styles.iconView}>
-               <Feather name="user" size={24} color="white" />
-             </View>
-             <View style={{flexDirection: 'row'}}>
-               {images.map((image, index) => (
-                 <Image
-                   key={index}
-                   source={image.image}
-                   style={styles.smallImage}
-                 />
-               ))}
-             </View>
-             <TouchableOpacity style={styles.changeButton}>
-               <Ionicons
-                 name="person-add-outline"
-                 size={20}
-                 color="#757575"
-                 style={{marginRight: 8}}
-               />
-               <Text style={styles.text}>invite</Text>
-             </TouchableOpacity>
-           </View>
-           <View style={styles.aboutView}>
-             <Text style={styles.aboutText}>About event</Text>
-             <TouchableOpacity style={styles.aboutChangeButton}>
-               <AntDesign
-                 name="edit"
-                 size={20}
-                 color="#757575"
-                 style={{marginRight: 8}}
-               />
+  const images = [
+    {
+      image: require('../../assets/Rectangle7.png'),
+    },
+    {
+      image: require('../../assets/Rectangle9.png'),
+    },
+    {
+      image: require('../../assets/Rectangle11.png'),
+    },
+    {
+      image: require('../../assets/Rectangle12.png'),
+    },
+    {
+      image: require('../../assets/Rectangle13.png'),
+    },
+  ];
 
-               <Text style={styles.text}>change</Text>
-             </TouchableOpacity>
-           </View>
-           <View style={{padding: 15}}>
-             <Text style={styles.text}>
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-               enim ad minim veniam, quis nostrud exercitation ullamco laboris
-               nisi ut aliquip ex{' '}
-             </Text>
-           </View>
-           <View style={styles.mapView}>
-             <Image
-               source={require('../../assets/map.jpg')}
-               style={{width: '95%', height: 200}}
-             />
-           </View>
-         </View>
-       </ScrollView>
-     );
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <LinearGradient
+            style={styles.modalView}
+            colors={['#FF9A58', '#F87124']}>
+            <View style={styles.modelIconView}>
+              <Image
+                source={require('../../assets/hand.png')}
+                style={{width: 40, height: 40}}
+              />
+            </View>
+            <Text style={styles.eventTitleText}>Congratulations</Text>
+            <Text style={{...styles.text, color: 'white'}}>
+              Your event has been created
+            </Text>
+          </LinearGradient>
+        </Modal>
+
+        <View style={styles.headerView}>
+          <ImageBackground
+            source={require('../../assets/createevent.png')}
+            style={styles.headerImage}
+            resizeMode="stretch">
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
+              <Text style={styles.headerText}>Create Events</Text>
+              <View style={styles.shareIconView}>
+                <AntDesign name="sharealt" size={24} color="#F87124" />
+              </View>
+            </View>
+          </ImageBackground>
+        </View>
+        <View>
+          <LinearGradient
+            style={styles.eventTitleCard}
+            colors={['#FF9A58', '#F87124']}>
+            <Text style={styles.eventTitleText}>Wine tasting London Tour</Text>
+          </LinearGradient>
+        </View>
+        <View style={styles.view}>
+          <View style={styles.iconView}>
+            <MaterialCommunityIcons name="cash" size={24} color="white" />
+          </View>
+          <Text style={styles.text}>free to join</Text>
+        </View>
+        <View style={styles.view}>
+          <View style={styles.iconView}>
+            <MaterialCommunityIcons
+              name="calendar-blank-outline"
+              size={24}
+              color="white"
+            />
+          </View>
+          <View>
+            <Text style={styles.text}>Mon, Jun, 5, 2022</Text>
+            <Text style={styles.dateText}>10 a.m - 2 p.m</Text>
+          </View>
+          <TouchableOpacity style={styles.changeButton}>
+            <AntDesign
+              name="edit"
+              size={20}
+              color="#757575"
+              style={{marginRight: 8}}
+            />
+
+            <Text style={styles.text}>change</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.view}>
+          <View style={styles.iconView}>
+            <Feather name="user" size={24} color="white" />
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            {images.map((image, index) => (
+              <Image
+                key={index}
+                source={image.image}
+                style={styles.smallImage}
+              />
+            ))}
+          </View>
+          <TouchableOpacity style={styles.changeButton}>
+            <Ionicons
+              name="person-add-outline"
+              size={20}
+              color="#757575"
+              style={{marginRight: 8}}
+            />
+            <Text style={styles.text}>invite</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.aboutView}>
+          <Text style={styles.aboutText}>About event</Text>
+          <TouchableOpacity style={styles.aboutChangeButton}>
+            <AntDesign
+              name="edit"
+              size={20}
+              color="#757575"
+              style={{marginRight: 8}}
+            />
+
+            <Text style={styles.text}>change</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{padding: 15}}>
+          <Text style={styles.text}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex{' '}
+          </Text>
+        </View>
+        <View style={styles.mapView}>
+          <Image
+            source={require('../../assets/map.jpg')}
+            style={{width: '95%', height: 200}}
+          />
+        </View>
+      </View>
+    </ScrollView>
+  );
 };
 
 export default ShareEventScreen;
@@ -266,14 +292,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   shareIconView: {
-     width:40,
-     height:40,
-     borderRadius:10,
-     backgroundColor:'white',
-     justifyContent:'center',
-     alignItems:'center',
-     position:'absolute',
-     right:15,
-     elevation:5
-  }
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    right: 15,
+    elevation: 5,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    height: 265,
+    width: '90%',
+    justifyContent: 'center',
+    marginTop: '50%',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modelIconView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    width: 70,
+    height: 70,
+    borderRadius: 50,
+    marginBottom: 20,
+  },
 });
